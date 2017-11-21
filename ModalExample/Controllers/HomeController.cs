@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ModalExample.Model;
+using System.Web.Services;
+using System.Web.Script.Services;
+using ModalExample.Models;
 
 namespace ModalExample.Controllers
 {
@@ -10,8 +14,21 @@ namespace ModalExample.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            IndexVM model = new IndexVM();
+            model.vols = Volunteers.vols;
+            //Volunteer vol1 = new Volunteer();
+
+            return View(model);
         }
+
+        [HttpGet]
+        public ActionResult GetPartial(int id)
+        {
+            //Volunteers vols = new Volunteers();
+            Volunteer volunteer = Volunteers.vols.ElementAt(id);
+            return PartialView("_ModalPartial", volunteer);
+        }
+
 
         public ActionResult About()
         {
