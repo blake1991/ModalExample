@@ -30,6 +30,14 @@ namespace ModalExample.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult PostVolunteer(Volunteer vol)
+        {
+            //insert breakpoint here
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

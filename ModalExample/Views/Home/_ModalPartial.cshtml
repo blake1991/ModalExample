@@ -1,7 +1,7 @@
 ﻿@model ModalExample.Model.Volunteer
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("PostVolunteer", "Home"))
 {
     @Html.AntiForgeryToken()
     
@@ -38,7 +38,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
