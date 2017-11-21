@@ -14,6 +14,12 @@ This is a modal demo.
 </div>
 
 <hr />
+@using (Html.BeginForm("TimePost", "Home"))
+{  
+    @Html.EditorFor(x => x.dateBox)
+    <button type="submit" class="btn btn-primary">Save changes</button>
+}
+
 
 @foreach (var item in Model.vols)
 {
@@ -49,7 +55,7 @@ This is a modal demo.
             </div>
             @*<div class="modal-footer">
 
-            </div>*@
+                </div>*@
         </div>
     </div>
 </div>

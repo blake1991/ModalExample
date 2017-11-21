@@ -17,8 +17,17 @@ namespace ModalExample.Controllers
             IndexVM model = new IndexVM();
             model.vols = Volunteers.vols;
             //Volunteer vol1 = new Volunteer();
+            DateTime time;
+            
 
             return View(model);
+        }
+
+
+        [HttpPost]
+        public void TimePost(IndexVM vm)
+        {
+
         }
 
         [HttpGet]
