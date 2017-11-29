@@ -28,10 +28,10 @@
         if (item.Id != 0)
         {
             <div class="row">
-                <div class="col-md-3">@item.firstName</div>
+                <div class="col-md-3 glyphicon-edit">@item.firstName</div>
                 <div class="col-md-3">@item.lastName</div>
                 <div class="col-md-3">@item.address</div>
-                <div class="col-md-3">@HabitatForHumanity.ViewModels.ToolKitVM.ModalEditButton("editButton", "testModal", item.Id.ToString())</div>
+                <div class="col-md-3">@HabitatForHumanity.ViewModels.ToolKitVM.ModalEditButtonGlyph("editButton", "testModal", item.Id.ToString(), "Edit User")</div>
             </div>
         }
     }

@@ -85,6 +85,26 @@ namespace HabitatForHumanity.ViewModels
             return new HtmlString(editButton);
         }
 
+        public static IHtmlString ModalEditButtonGlyph(string buttonClass, string targetModal, string dataId, string optionalText)
+        {
+            string glyph = "";
+
+            string editButton = "<button type='button' dataId='{2}' class='btn btn-primary {0}' data-toggle='modal' data-target='#{1}'>{3}{4}</button>";
+
+
+            if(optionalText == null)
+            {
+                glyph = "<span class='glyphicon glyphicon-edit'></span>"; //no margin styling to keep the button size consistent
+            }
+            else
+            {
+                glyph = "<span class='glyphicon glyphicon-edit' style='margin-right:5px'></span>";
+            }
+
+
+            editButton = String.Format(editButton, buttonClass, targetModal, dataId, glyph, optionalText);
+            return new HtmlString(editButton);
+        }
 
 
         /// <summary>
