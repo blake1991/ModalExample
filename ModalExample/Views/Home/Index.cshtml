@@ -31,7 +31,7 @@
                 <div class="col-md-3 glyphicon-edit">@item.firstName</div>
                 <div class="col-md-3">@item.lastName</div>
                 <div class="col-md-3">@item.address</div>
-                <div class="col-md-3">@HabitatForHumanity.ViewModels.ToolKitVM.ModalEditButtonGlyph("editButton", "testModal", item.Id.ToString(), "Edit User")</div>
+                <div class="col-md-3">@ToolKit.ToolKitVM.ModalEditButtonGlyph("editButton", "testModal", item.Id.ToString(), "Edit User")</div>
             </div>
         }
     }
@@ -43,7 +43,7 @@
             Launch demo modal
         </button>*@
 
-@HabitatForHumanity.ViewModels.ToolKitVM.Modal("testModal", "This is a title", "editPartial", "test")
+@ToolKit.ToolKitVM.Modal("testModal", "This is a title", "editPartial", "test")
 
     
 
