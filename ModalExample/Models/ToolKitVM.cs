@@ -3,6 +3,9 @@ using System.Web;
 
 namespace ToolKit
 {
+    //trash can button
+    //do you really want to kill trees?
+    //pass buttons to modal for better control over save/close and delete abilities
     public static class ToolKitVM
     {
         /// <summary>
@@ -57,6 +60,52 @@ namespace ToolKit
             modal = String.Format(modal, modalId, modalDialog);
 
             return new HtmlString(modal);
+        }
+
+
+
+        /// <summary>
+        /// Constructs a modal and an ajax handler for passing data from a partial in a modal to a controller action.
+        /// This method is most useful when you're trying to do data validation with a partial view inside of a modal.
+        /// By default forms will attempt to redirect to a returned action result which will close the modal. This 
+        /// modal prevents the form from navigating away while using ajax to speak with the controller asynchronously. That 
+        /// way if a partial validation is returned it can be reinserted into the modal without disorienting users.
+        /// </summary>
+        /// <param name="modalId">Your modals id.</param>
+        /// <param name="titleText">The title display of the modal.</param>
+        /// <param name="partialTargetId">The id of the innermost div for partial pages.</param>
+        /// <param name="formId">The id of the form to submit. This lets the form button exist outside of the form.</param>
+        /// <returns>An html string of the modal.</returns>
+        public static IHtmlString ModalPreventDefault(string modalId, string titleText, string partialTargetId, string formId)
+        {
+
+            //0 is modalId, 1 is formId ,2 is ajax
+            string script = "<script type='text/javascript'>{0}</script>";
+            string function = " $('#{0}').on('submit',function(e){{e.preventDefault(); {1}{2}{3}{4} }});";
+
+            string action = "var action = $('#{0}').attr('action');"; // 0 is formId
+            string method = "var method = $('#{0}').attr('method');";
+            string form = "var form = $('#{0}');"; // 0 is formid
+
+            string ajaxCall = "$.ajax({{ url: action, type: method, data: form.serialize(), success: function(response)" +
+                "{{ $('#{0}').html(response); console.log(response)}} }});";
+
+            //build action
+            action = String.Format(action, formId);
+            method = String.Format(method, formId);
+            ajaxCall = String.Format(ajaxCall, partialTargetId);
+            form = String.Format(form, formId);
+
+            function = String.Format(function, modalId, action, method, form, ajaxCall);
+
+            script = String.Format(script, function);
+
+            IHtmlString modal = Modal(modalId, titleText, partialTargetId, formId);
+
+            string modalWithJS = String.Format("{0}{1}", modal.ToString(), script);
+
+            return new HtmlString(modalWithJS);
+
         }
 
         /// <summary>

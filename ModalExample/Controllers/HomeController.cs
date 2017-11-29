@@ -42,9 +42,12 @@ namespace ModalExample.Controllers
         [HttpPost]
         public ActionResult PostVolunteer(Volunteer vol)
         {
+            vol.firstName = "this has changed";
             //insert breakpoint here
-
-            return RedirectToAction("Index");
+           // return PartialView("AjaxForm", vol);
+            //return RedirectToAction("Index");
+            return PartialView("success");
+            //return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult About()

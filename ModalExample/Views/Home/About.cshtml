@@ -5,3 +5,32 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+@ToolKit.ToolKitVM.Modal("aboutModal", "this is an about modal", "partialDiv", "ajaxForm")
+@ToolKit.ToolKitVM.ModalEditButtonGlyph("editButton", "aboutModal", "1", "Edit")
+
+
+<script>
+    $('#aboutModal').on('hidden.bs.modal', function () {
+        return false;
+    });
+
+    $(".editButton").click(function () {
+        console.log('clicked');
+        var id = $(this).attr("dataId");
+        console.log(id);
+        inputData = { 'id': id }
+
+        $.ajax(
+            {
+                url: '/Home/GetPartial',
+                type: 'GET',
+                data: inputData,
+                success: function (response) {
+                    $("#partialDiv").html(response);
+                }
+            }
+        );
+
+    });
+</script>

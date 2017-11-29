@@ -205,6 +205,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_ModalPartial.cshtml" />
+    <Content Include="Views\Home\AjaxForm.cshtml" />
+    <Content Include="Views\Home\success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
