@@ -40,28 +40,26 @@
 
     
 @ToolKit.ToolKitVM.ModalPreventDefault("testModal", "This is a title", "editPartial", "test")
-
-    <script type="text/javascript">
-
-        
-
-        $(".editButton").click(function () {
-            console.log('clicked');
-            var id = $(this).attr("dataId");
-            console.log(id);
-            inputData = { 'id': id }
+@ToolKit.ToolKitVM.ButtonScript("editButton", "GetPartial", "Home", "editPartial")
+ @*<script type="text/javascript">
+            $(".editButton").click(function() {
+                console.log('clicked');
+                var id = $(this).attr("dataId");
+                console.log(id);
+                inputData = { 'id': id }
 
             $.ajax(
                 {
-                    url: '/Home/GetPartial',
-                    type: 'GET',
-                    data: inputData,
-                    success: function (response) {
+                    url:
+                    '/Home/GetPartial',
+                    type:
+                    'GET',
+                    data:
+                    inputData,
+                    success:
+                    function(response) {
                         $("#editPartial").html(response);
                     }
                 }
             );
-
-        })
-
-     </script>
+ </script>*@

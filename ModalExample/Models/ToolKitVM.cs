@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Helpers;
 
 namespace ToolKit
 {
@@ -88,7 +89,7 @@ namespace ToolKit
             string form = "var form = $('#{0}');"; // 0 is formid
 
             string ajaxCall = "$.ajax({{ url: action, type: method, data: form.serialize(), success: function(response)" +
-                "{{ $('#{0}').html(response); console.log(response)}} }});";
+                "{{ $('#{0}').html(response);}} }});";
 
             //build action
             action = String.Format(action, formId);
@@ -149,6 +150,33 @@ namespace ToolKit
 
             editButton = String.Format(editButton, buttonClass, targetModal, dataId, glyph, optionalText);
             return new HtmlString(editButton);
+        }
+
+
+        /// <summary>
+        /// Builds a script for handling GET requests that load partial views into a modal.
+        /// </summary>
+        /// <param name="action">The action method to invoke.</param>
+        /// <param name="controller">The controller where the action is located.</param>
+        /// <param name="buttonClass">An extra defined class given to the button for jquery targetting.</param>
+        /// <param name="partialTarget">The partial div in the modal where the returned html is supposed to go.</param>
+        public static IHtmlString ButtonScript(string buttonClass, string action, string controller, string partialTarget)
+        {
+
+            string url = String.Format("'/{0}/{1}'", controller, action);
+            string ajaxCall = "$.ajax( {{ url: {0}, type: 'GET', data: inputData, success: function(response){{ $('#{1}').html(response); }} }});";
+
+            ajaxCall = String.Format(ajaxCall, url, partialTarget);
+
+            string function = "$('.{0}').click(function() {{  var id = $(this).attr('dataId'); inputData = {{ 'id': id }}; {1} }})";
+
+            function = String.Format(function, buttonClass, ajaxCall);
+
+            string script = "<script type='text/javascript'>{0}</script>";
+
+            script = String.Format(script, function);
+
+            return new HtmlString(script);
         }
     }
 }
