@@ -33,8 +33,8 @@ namespace ToolKit
             string modalContent = "<div class='modal-content'>{0}{1}{2}</div>";
             string modalDialog = "<div class='modal-dialog' role='document'>{0}</div>";
             string modalFooter = "<div class='modal-footer'>{0}{1}</div>";
-            string modalFooterClose = "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
-            string modalFooterSubmit = "<button type='submit'  form='{0}' class='btn btn-primary'>Save changes</button>";
+            string modalFooterClose = "<button type='button' id='modalCloseButton' class='btn btn-default' data-dismiss='modal'>Close</button>";
+            string modalFooterSubmit = "<button type='submit' id='modalSubmitButton'  form='{0}' class='btn btn-primary'>Save changes</button>";
             string modal = "<div class='modal fade' id='{0}' tabindex='-1' role='dialog' aria-labelledby='{0}Label'>{1}</div>"; //0 = myModal 1= 
 
             //string fullModal = String.Format(modal, modalId, modalDialog);
@@ -123,6 +123,7 @@ namespace ToolKit
             return new HtmlString(editButton);
         }
 
+
         /// <summary>
         /// Creates an edit button with a glyphicon. 
         /// </summary>
@@ -168,7 +169,7 @@ namespace ToolKit
 
             ajaxCall = String.Format(ajaxCall, url, partialTarget);
 
-            string function = "$('.{0}').click(function() {{  var id = $(this).attr('dataId'); inputData = {{ 'id': id }}; {1} }})";
+            string function = "$('.{0}').click(function() {{ $('#modalSubmitButton').show(); var id = $(this).attr('dataId'); inputData = {{ 'id': id }}; {1} }})";
 
             function = String.Format(function, buttonClass, ajaxCall);
 
@@ -177,6 +178,22 @@ namespace ToolKit
             script = String.Format(script, function);
 
             return new HtmlString(script);
+        }
+
+        /// <summary>
+        /// Builds a small script for hiding the modal submit button after a success page is shown. Results in better page flow.
+        /// Refreshes the page after the close button is clicked.
+        /// </summary>
+        /// <returns>An html string of a script tag.</returns>
+        public static IHtmlString HideModalButtonOnSuccess()
+        {
+            var script = "<script type='text/javascript'>{0}{1}</script>";
+            var function = " $(document).ready(function () {{ $('#modalSubmitButton').hide(); }} );";
+            var refresh = "$('#modalCloseButton').click(function() {{ location.reload(); }});";
+            
+            script = String.Format(script, function, refresh);
+            return new HtmlString(script);
+
         }
     }
 }
