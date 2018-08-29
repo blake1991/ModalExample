@@ -11,7 +11,14 @@ namespace ModalExample.Model
         public int Id { get; set; } = 1;
         public string firstName { get; set; } 
         public string lastName { get; set; }
-        public string address { get; set; } 
+        public string address { get; set; }
+
+        public void UpdateVolunteer(Volunteer vol)
+        {
+            this.firstName = vol.firstName;
+            this.lastName = vol.lastName;
+            this.address = vol.address;
+        }
     }
 
     public class Volunteers

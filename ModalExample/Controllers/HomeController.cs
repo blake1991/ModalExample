@@ -17,7 +17,7 @@ namespace ModalExample.Controllers
             IndexVM model = new IndexVM();
             model.vols = Volunteers.vols;
             //Volunteer vol1 = new Volunteer();
-            DateTime time;
+            //DateTime time;
             
 
             return View(model);
@@ -44,8 +44,13 @@ namespace ModalExample.Controllers
         {
             vol.firstName = "this has changed";
             //insert breakpoint here
-           // return PartialView("AjaxForm", vol);
+            // return PartialView("AjaxForm", vol);
             //return RedirectToAction("Index");
+
+             Volunteers.vols.Find(x => x.Id == vol.Id).UpdateVolunteer(vol);
+            //Volunteers.vols.ReoveAt(changedVolunteer);
+            //Volunteers.vols.Insert(changedVolunteer, vol);
+         
             return PartialView("success");
             //return Redirect(Request.UrlReferrer.ToString());
         }
